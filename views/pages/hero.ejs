@@ -7,20 +7,29 @@
                 <div class="row row-cols-1 row-cols-md-4 row-cols-lg-5 g-4">
                     <% data.forEach(hero => { %>
                         <div class="col">
-                            <div class="card h-100">
-                                <img src="https://placehold.co/300x180"alt="hero image" class="img-fluid image card-img-top" />
-                                <div class="card-body">
-                                    <h2 class="card-title">
+                            <div class="card-container">
+                                <div class="card wild-card" data-tilt>
+                                    <div class="animated-border"></div>
+                                    <div class="card-inner h-100">
+                                    <img src="https://placehold.co/300x180" alt="hero image" class="card-img-top" />
+                                    <div class="card-body">
+                                        <h2 class="card-title">
                                         <% if (hero.hero_name == null) { %>
                                             <%= hero.first_name %> <%= hero.last_name %>
                                         <% } else { %>
                                             <%= hero.hero_name %>
                                         <% } %>
-                                    </h2>
+                                        </h2>
+                                        <div class="power-bar">
+                                        <div class="power-fill" style="width: <%= hero.power_level %>%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="/heroes/<%= hero.hero_id %>" class="card-link">View More</a>
+                                    </div>
+                                    </div>
                                 </div>
-                                <div class="card-footer">
-                                    <a href="/heroes/<%= hero.hero_id %>" class="card-link">view more</a>
-                                </div>
+
                             </div>
                         </div>
                     <% }) %>

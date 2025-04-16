@@ -86,7 +86,7 @@ router.get('/heroes', (req, res)=> {
     .then(resp => {
         res.render('pages/hero', {
             title: 'All Heroes',
-            name: 'Heroes',
+            name: 'SUPER HERO AND SUPER VILLAIN',
             data: resp.data,
             asideData: heroAsideData
         })
@@ -112,6 +112,25 @@ router.get('/heroes/:id', (req, res)=> {
             data: resp.data,
             asideData: heroAsideData,
             count
+        })
+    })
+})
+
+// subpages
+const subData = ['power', 'franchise', 'team', 'species']
+
+subData.forEach(dataPoint => {
+    
+    router.get(`/${dataPoint}`, (req, res) => {
+        const url = `http://localhost:${port}/api/${dataPoint}`
+
+        axios.get(url)
+        .then(resp => {
+            res.render('pages/allData', {
+                title: dataPoint,
+                name: `All ${dataPoint}`,
+                data: resp.data
+            })
         })
     })
 })
