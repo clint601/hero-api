@@ -117,24 +117,33 @@ router.get('/heroes/:id', (req, res)=> {
 })
 
 // subpages
-const subData = ['power', 'franchise', 'team', 'species']
-
-subData.forEach(dataPoint => {
-    
-    router.get(`/${dataPoint}`, (req, res) => {
-        const url = `http://localhost:${port}/api/${dataPoint}`
+    router.get('/power', (req, res) => {
+        const url = `http://localhost:${port}/api/power`
 
         axios.get(url)
         .then(resp => {
-            res.render('pages/allData', {
-                title: dataPoint,
-                name: `All ${dataPoint}`,
+            res.render('pages/allPower', {
+                title: 'Powers',
+                name: 'All Powers',
                 data: resp.data
             })
         })
     })
-})
 
+    router.get('/power/pow/:power', (req, res)=> {
+        const power = req.params.power
+
+        const url = `http://localhost:${port}/api/power/pow/${power}`
+
+        axios.get(url)
+        .then(resp => {
+            res.render('pages/powerSingle', {
+                title: power,
+                name: `Heroes with ${power}`,
+                data: resp.data
+            })
+        })
+    })
 
 // 1b
 module.exports = router
